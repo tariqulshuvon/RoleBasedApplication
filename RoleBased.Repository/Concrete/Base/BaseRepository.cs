@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RoleBased.Infrastructure.Persistence;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace RoleBased.Repository.Concrete.Base;
 
@@ -19,7 +20,7 @@ public class RepositoryBase<TEntity, IModel, T> : IRepository<TEntity, IModel, T
 {
     private readonly RoleBasedDbContext _dbContext;
     private readonly IMapper _mapper;
-    public RepositoryBase(EmployeeDbContext dbContext, IMapper mapper)
+    public RepositoryBase(RoleBasedDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;
