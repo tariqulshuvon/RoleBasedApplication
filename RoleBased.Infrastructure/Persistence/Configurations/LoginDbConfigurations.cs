@@ -14,5 +14,11 @@ public class LoginDbConfigurations : IEntityTypeConfiguration<LoginDB>
     public void Configure(EntityTypeBuilder<LoginDB> builder)
     {
         builder.HasKey(x => x.RegNo);
+        builder.HasData(new
+        {
+            RegNo = "2016-2-60-147",
+            Password = "12345",
+            Role = "Admin"
+        });
     }
 }

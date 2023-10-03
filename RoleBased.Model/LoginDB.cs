@@ -10,10 +10,7 @@ namespace RoleBased.Model;
 
 public class LoginDB :IEntity
 {
-    [MaxLength(10)]
     public string RegNo { get; set; }
-    [MinLength(6)]
-    [MaxLength(10)]
     public string Password { get; set; }    
     public string Role { get; set; }
 }

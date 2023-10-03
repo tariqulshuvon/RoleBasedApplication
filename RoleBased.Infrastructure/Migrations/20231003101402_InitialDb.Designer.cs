@@ -11,8 +11,8 @@ using RoleBased.Infrastructure.Persistence;
 namespace RoleBased.Infrastructure.Migrations
 {
     [DbContext(typeof(RoleBasedDbContext))]
-    [Migration("20231002095227_LoginDbAdded")]
-    partial class LoginDbAdded
+    [Migration("20231003101402_InitialDb")]
+    partial class InitialDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,13 +27,11 @@ namespace RoleBased.Infrastructure.Migrations
             modelBuilder.Entity("RoleBased.Model.LoginDB", b =>
                 {
                     b.Property<string>("RegNo")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -42,6 +40,14 @@ namespace RoleBased.Infrastructure.Migrations
                     b.HasKey("RegNo");
 
                     b.ToTable("LoginDB");
+
+                    b.HasData(
+                        new
+                        {
+                            RegNo = "2016-2-60-147",
+                            Password = "12345",
+                            Role = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("RoleBased.Model.StudentInfo", b =>

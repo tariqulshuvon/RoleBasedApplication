@@ -1,7 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RoleBased.Core;
+using RoleBased.Core.Mapping;
 using RoleBased.Infrastructure.Persistence;
+using RoleBased.Repository.Concrete;
+using RoleBased.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,18 +24,16 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<RoleBasedDbContext>(option => option.UseSqlServer
         (configuration.GetConnectionString("defaultconnection")));
 
-        //services.AddAutoMapper(typeof(MappingExtension).Assembly);
-        //services.AddTransient<IEmployeeRepository, EmployeeRepository>();
-        //services.AddTransient<ICountryRepository, CountryRepository>();
-        //services.AddTransient<IStateRepository, StateRepository>();
+        services.AddAutoMapper(typeof(MappingExtension).Assembly);
+        services.AddTransient<IStudentInfoRepository, StudentInfoRepo>();
+        services.AddTransient<ILoginDbRepository, LoginDbRepo>();
+        services.AddValidatorsFromAssembly(typeof(ICore).Assembly);
 
-        //services.AddValidatorsFromAssembly(typeof(ICore).Assembly);
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssemblies(typeof(ICore).Assembly);
+        });
 
-        //services.AddMediatR(cfg =>
-        //{
-        //    cfg.RegisterServicesFromAssemblies(typeof(ICore).Assembly);
-        //    cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        //});
         return services;
     }
 }

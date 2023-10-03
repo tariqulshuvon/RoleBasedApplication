@@ -6,4 +6,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Behavior\" />
+    <Folder Include="CQRS\Rolebased\Command\Validation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RoleBased.Repository\RoleBased.Repository.csproj" />
+    <ProjectReference Include="..\RoleBased.Service.Model\RoleBased.Service.Model.csproj" />
+  </ItemGroup>
+
 </Project>
